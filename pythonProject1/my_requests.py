@@ -12,3 +12,11 @@ if response.status_code == 200 or response.status_code == 201:
     print(data)
 else:
     print(f"Eroare: {response.status_code}")
+
+response = requests.delete(url)
+
+if response.status_code == 200 or response.status_code == 201:
+    data = response.json()
+    print(data)
+else:
+    print(f"Eroare: {response.status_code}")
