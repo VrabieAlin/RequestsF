@@ -16,11 +16,26 @@ def get_users():
     return jsonify(users)
 
 @app.route('/api/users', methods=['POST'])
-def update_user():
+def add_user():
     new_user = request.get_json()
     new_user["id"] = len(users) + 1
     users.append(new_user)
     print(users)
     return jsonify(new_user), 201
+
+@app.route('/api/users/<int:user_id>', methods=['PUT'])
+def update_user(user_id):
+    my_user = None
+    for user in users:
+        if user["id"] == user_id:
+            my_user = user
+
+    if my_user != None:
+        data = request.get_json()
+        my_user.update(data)
+        return jsonify(my_user)
+    else:
+        return jsonify({"error": "User not found"}), 404
+
 
 app.run(debug=True)
