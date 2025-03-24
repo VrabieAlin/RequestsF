@@ -43,5 +43,15 @@ def delete_user(user_id):
     users = [user for user in users if user["id"] != user_id]
     return jsonify({"message": "User deleted"})
 
+#query param: /id?my_id=1
+@app.route('/id')
+def get_id():
+    id = request.args.get("my_id")
+    if id != None:
+        print(f"Am primit de la client id-ul: {id}")
+    else:
+        print("Nu exista id-ul!")
+
+    return jsonify({"Message": "Id primit!"})
 
 app.run(debug=True)
